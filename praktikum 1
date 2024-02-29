@@ -1,72 +1,79 @@
-<html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta name ="description" content = "ini adalah menu input biodata">
-<title>web1 </title>
+  <meta name="description" content="Ini adalah menu input biodata yang diperbarui" />
+  <title>web1 - Form Biodata</title>
 </head>
 <body>
-<form name = "formsatu">
-<legend><b><fornt color = blue> Data Input </b></font></legend>
-<table border = "0">
-<table border = "0" cellspacing = "2" bggcolor = "blue">
-<tr>
-<td bgcolor ="white">NIM : </td>
-<td><input type = "text" name = "id"></input></td>
-</tr>
-<tr>
-<td bgcolor = "white">Nama: </td>
-<td><input type = "text" name = "nama"></input></td>
-</tr>
-<tr>
-<td bgcolor = "white">Alamat: </td> <td><input type = "text" name = "alamat"></input>
-</td>
-</tr>
-<tr>
-<td bgcolor = "white">jenis Kelamin : </td>
-<td><select name= "sex">
-				<option value + "perempuan">perempuan</option>
-				<option value + "laki-laki"> laki-laki</option>
-</select></td>
-</tr>
-<tr>
-<td bgcolor = "white">agama:</td>
-<td bgcolor = "blue">
-<input	type	= "checkbox"	name="ag01"	value	= "islam"><font	color	=
-"white"><b>islam</b></font></font></input><br/>
-<input	type	= "checkbox"	name="ag01"	value	= "protestan"><font	color	=
-"white"><b>protestan</b></font></font></input><br/>
-<input	type	= "checkbox"	name="ag01"	value	= "katolik"><font	color	=
-"white"><b>katolik</b></font></font></input><br/>
-<input	type	= "checkbox"	name="ag01"	value	= "budha"><font	color	=
-"white"><b>budha</b></font></font></input><br/>
-<input	type	= "checkbox"	name="ag01"	value	= "hindu"><font	color	=
-"white"><b>hindu</b></font></font></input><br/>
-</td>
-</tr>
-<tr>
-<td bgcolor = "white">
-Status:</td>
-<td bgcolor = "blue">
-<input	type	= "Radio"	name="st"	value	= "single"><font
-color	="white"><b>single</b></font></font></input><br/>
-<input	type	= "Radio"	name="st"	value	= "Married"><font	color	=
-"white"><b>Married</b></font></font></input><br/>
-<input	type	= "Radio"	name="st"	value	= "Relationship"><font	color	=
-"white"><b>Relationship</b></font></font></input><br/>
-<input	type	= "radio"	name="ag01"	value	= "Comlicated"><font	color	=
-"white"><b>complicated</b></font></font></input><br/>
-</td>
-</tr>
-</table>
-<table>
-<tr>
-<td><input type = "button" value = "save"></input></td>
-<td><input type = "button" value = "edit"></input></td>
-<td><input type = "button" value = "Delete"name = "hapus"></input></td>
-<td>
-<input type +"reset"value = "reste"></input>
-</td>
-</tr>
-</table>
-</form>
+  <form name="formSatu">
+      <legend><b><span style="color:blue;">Data Input</span></b></legend>
+      <table border="0" cellpadding="2" bgcolor="blue">
+        <tr>
+          <td bgcolor="white">NIM :</td>
+          <td><input type="text" name="id" /></td>
+        </tr>
+        <tr>
+          <td bgcolor="white">Nama :</td>
+          <td><input type="text" name="nama" /></td>
+        </tr>
+        <tr>
+          <td bgcolor="white">Email :</td>
+          <td><input type="email" name="email" /></td>
+        </tr>
+        <tr>
+          <td bgcolor="white">Alamat :</td>
+          <td><input type="text" name="alamat" /></td>
+        </tr>
+        <tr>
+          <td bgcolor="white">Jenis Kelamin :</td>
+          <td>
+            <select name="sex">
+              <option value="perempuan">perempuan</option>
+              <option value="laki-laki">laki-laki</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td bgcolor="white">Agama :</td>
+          <td bgcolor="blue">
+            <input type="radio" name="ag01" value="Islam" /><span style="color:white;"><b>Islam</b></span><br />
+            <input type="radio" name="ag01" value="Protestan" /><span style="color:white;"><b>Protestan</b></span><br />
+            <input type="radio" name="ag01" value="Katolik" /><span style="color:white;"><b>Katolik</b></span><br />
+            <input type="radio" name="ag01" value="Buddha" /><span style="color:white;"><b>Buddha</b></span><br />
+            <input type="radio" name="ag01" value="Hindu" /><span style="color:white;"><b>Hindu</b></span>
+          </td>
+        </tr>
+        <tr>
+          <td bgcolor="white">Status :</td>
+          <td bgcolor="blue">
+            <input type="radio" name="st" value="Single" /><span style="color:white;"><b>Single</b></span><br />
+            <input type="radio" name="st" value="Married" /><span style="color:white;"><b>Married</b></span><br />
+            <input type="radio" name="st" value="Relationship" /><span style="color:white;"><b>In a Relationship</b></span><br />
+            <input type="radio" name="st" value="Complicated" /><span style="color:white;"><b>Complicated</b></span>
+          </td>
+        </tr>
+        <tr>
+          <td bgcolor="white">Hobi :</td>
+          <td><input type="text" name="hobi" /></td>
+        </tr>
+        <tr>
+          <td bgcolor="white">Peminatan Konsentrasi :</td>
+          <td>
+            <select name="konsentrasi">
+              <option value="Keamanan Informasi">Keamanan Informasi</option>
+              <option value="RPL">RPL</option>
+              <option value="Grafika Komputer">Grafika Komputer</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="button" value="Save" /></td>
+          <td><input type="button" value="Edit" /></td>
+          <td><input type="button" value="Delete" name="hapus" /></td>
+          <td><input type="reset" value="Reset" /></td>
+        </tr>
+      </table>
+  </form>
 </body>
 </html>
