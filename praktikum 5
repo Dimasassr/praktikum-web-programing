@@ -1,0 +1,314 @@
+latihan 1 : 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pencarian dan Penyimpanan Data Buku</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-image: url('th.jfif'); /* Ganti dengan URL gambar latar belakang Anda */
+      background-size: cover;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+    }
+    th {
+      text-align: left;
+    }
+    img {
+      width: 100px; /* Atur lebar gambar */
+    }
+  </style>
+</head>
+<body>
+  <h2>Form Input Data Buku</h2>
+  <!-- Form untuk menambahkan buku baru -->
+  <form id="bookForm">
+    Nama Buku: <input type="text" id="bookName" name="bookName"><br><br>
+    Penulis: <input type="text" id="author" name="author"><br><br>
+    Tahun Terbit: <input type="number" id="yearPublished" name="yearPublished" min="1900" max="2099" placeholder="Tahun"><br><br>
+    Gambar Buku: <input type="file" id="bookImage" accept="image/*"><br><br>
+    <input type="button" value="Tambah" onclick="addBook()">
+  </form>
+
+  <h2>Pencarian Buku</h2>
+  <!-- Input untuk mencari buku dalam tabel -->
+  Cari Buku: <input type="text" id="searchInput" onkeyup="searchBook()" placeholder="Cari berdasarkan tahun, nama, atau penulis">
+
+  <h2>Daftar Buku</h2>
+  <!-- Tabel untuk menampilkan buku -->
+  <table id="booksTable">
+    <tr>
+      <th>Nama Buku</th>
+      <th>Penulis</th>
+      <th>Tahun Terbit</th>
+      <th>Gambar</th>
+    </tr>
+    <!-- Data buku akan ditampilkan di sini -->
+  </table>
+
+  <script>
+    // Fungsi untuk mengkonversi gambar ke Base64
+    function convertImageToBase64(file, callback) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        callback(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Fungsi untuk menambahkan buku ke dalam 'localStorage' dan memperbarui tabel
+    function addBook() {
+      var name = document.getElementById("bookName").value;
+      var author = document.getElementById("author").value;
+      var year = document.getElementById("yearPublished").value;
+      var imageFile = document.getElementById("bookImage").files[0];
+      
+      if (name && author && year) {
+        if (imageFile) {
+          convertImageToBase64(imageFile, function(base64Image) {
+            saveBook(name, author, year, base64Image);
+            document.getElementById("bookForm").reset();
+          });
+        } else {
+          saveBook(name, author, year, '');
+          document.getElementById("bookForm").reset();
+        }
+      } else {
+        alert("Silakan lengkapi semua bidang formulir.");
+      }
+    }
+
+    // Fungsi untuk menyimpan buku ke dalam 'localStorage'
+    function saveBook(name, author, year, base64Image) {
+      let books = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : [];
+      books.push({ name, author, year, image: base64Image });
+      localStorage.setItem('books', JSON.stringify(books));
+      loadBooks(); // Memperbarui tabel
+    }
+
+    // Fungsi untuk memuat buku dari 'localStorage' dan menampilkan ke dalam tabel
+    function loadBooks() {
+      let books = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : [];
+      const table = document.getElementById("booksTable");
+      while (table.rows.length > 1) {
+        table.deleteRow(1);
+      }
+      books.forEach(book => {
+        var row = table.insertRow();
+        row.insertCell().innerHTML = book.name;
+        row.insertCell().innerHTML = book.author;
+        row.insertCell().innerHTML = book.year;
+        row.insertCell().innerHTML = book.image ? `<img src="${book.image}" alt="Gambar Buku">` : 'Tidak Ada Gambar';
+      });
+    }
+
+    function searchBook() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("booksTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td");
+        var displayStyle = 'none'; // Assume the row will not match the search
+
+        // Loop through all cells in the row
+        for (var j = 0; j < td.length; j++) {
+          if (td[j]) {
+            txtValue = td[j].textContent || td[j].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              displayStyle = ''; // The row matches the search, so it will be displayed
+              break;
+            }
+          }
+        }
+        tr[i].style.display = displayStyle;
+      }
+    }
+
+    // Inisialisasi data buku saat halaman web dimuat
+    window.onload = function() {
+      loadBooks();
+    };
+  </script>
+</body>
+</html>
+
+Latihan 2 : 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pencarian dan Penyimpanan Data Proyek</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-image: url('th (2).jfif'); /* Ganti dengan URL gambar latar belakang Anda */
+      background-size: cover;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="button"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <!-- Form Input Data Proyek -->
+  <h2>Form Input Data Proyek</h2>
+  <form id="projectForm">
+    <label for="projectBenefit">Manfaat Proyek bagi Organisasi:</label>
+    <input type="text" id="projectBenefit" name="projectBenefit">
+
+    <label for="leadingIndicator">Leading Indicator:</label>
+    <input type="text" id="leadingIndicator" name="leadingIndicator">
+
+    <label for="userOutcomes">User Outcomes dan Model Properties:</label>
+    <textarea id="userOutcomes" name="userOutcomes" rows="4" cols="50"></textarea>
+
+    <label for="startDate">Tanggal Mulai:</label>
+    <input type="date" id="startDate" name="startDate">
+
+    <label for="endDate">Tanggal Selesai:</label>
+    <input type="date" id="endDate" name="endDate">
+
+    <label for="designStatus">Status Penyelesaian Perancangan:</label>
+    <select id="designStatus" name="designStatus">
+      <option value="selesai">Selesai</option>
+      <option value="berlangsung">Berlangsung</option>
+      <option value="gagal">Gagal</option>
+    </select>
+
+    <label for="finalNotes">Deskripsi Catatan Akhir Kegiatan:</label>
+    <textarea id="finalNotes" name="finalNotes" rows="4" cols="50"></textarea>
+
+    <input type="button" value="Simpan" onclick="saveProject()">
+  </form>
+
+  <!-- Daftar Proyek -->
+  <h2>Daftar Proyek</h2>
+  <table id="projectsTable">
+    <tr>
+      <th>Manfaat Proyek</th>
+      <th>Leading Indicator</th>
+      <th>User Outcomes dan Model Properties</th>
+      <th>Tanggal Mulai</th>
+      <th>Tanggal Selesai</th>
+      <th>Status Penyelesaian</th>
+      <th>Deskripsi Catatan Akhir</th>
+      <th>Waktu Perekaman</th>
+    </tr>
+    <!-- Data proyek akan ditampilkan di sini -->
+  </table>
+
+  <script>
+    // Fungsi untuk menyimpan data proyek
+    function saveProject() {
+      var benefit = document.getElementById("projectBenefit").value;
+      var indicator = document.getElementById("leadingIndicator").value;
+      var outcomes = document.getElementById("userOutcomes").value;
+      var startDate = document.getElementById("startDate").value;
+      var endDate = document.getElementById("endDate").value;
+      var status = document.getElementById("designStatus").value;
+      var notes = document.getElementById("finalNotes").value;
+
+      if (benefit && indicator && outcomes && startDate && endDate && status && notes) {
+        var projects = localStorage.getItem('projects') ? JSON.parse(localStorage.getItem('projects')) : [];
+        var currentTime = new Date();
+        var timestamp = currentTime.toLocaleString();
+
+        projects.push({ benefit, indicator, outcomes, startDate, endDate, status, notes, timestamp });
+        localStorage.setItem('projects', JSON.stringify(projects));
+        loadProjects(); // Memperbarui tabel
+      } else {
+        alert("Silakan lengkapi semua bidang formulir.");
+      }
+    }
+
+    // Fungsi untuk memuat data proyek dari 'localStorage' dan menampilkan ke dalam tabel
+    function loadProjects() {
+      var projects = localStorage.getItem('projects') ? JSON.parse(localStorage.getItem('projects')) : [];
+      var table = document.getElementById("projectsTable");
+      table.innerHTML = ''; // Mengosongkan tabel sebelum memuat data baru
+      projects.forEach(project => {
+        var row = table.insertRow();
+        row.insertCell().innerHTML = project.benefit;
+        row.insertCell().innerHTML = project.indicator;
+        row.insertCell().innerHTML = project.outcomes;
+        row.insertCell().innerHTML = project.startDate;
+        row.insertCell().innerHTML = project.endDate;
+        row.insertCell().innerHTML = project.status;
+        row.insertCell().innerHTML = project.notes;
+        row.insertCell().innerHTML = project.timestamp;
+      });
+    }
+
+    // Inisialisasi data proyek saat halaman web dimuat
+    window.onload = function () {
+      loadProjects();
+    };
+  </script>
+</body>
+</html>
