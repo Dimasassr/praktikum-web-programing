@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registrasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('th.jfif'); /* Ganti dengan URL gambar latar belakang Anda */
+            background-size: cover;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8); /* Menambahkan opasitas pada form */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: fit-content;
+            max-width: 90%;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <h2>Daftar Akun Baru</h2>
+        <label for="name">Nama:</label>
+        <input type="text" id="name" name="name">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+
+        <label for="password">Kata Sandi:</label>
+        <input type="password" id="password" name="password">
+        <div id="passwordError" class="error-message"></div>
+
+        <label for="confirmPassword">Konfirmasi Kata Sandi:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword">
+        <div id="confirmPasswordError" class="error-message"></div>
+
+        <!-- Tambahkan gambar -->
+        <img src="th.jfif" alt="Lock icon" width="20" height="20">
+        
+        <button type="submit">Daftar:</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('registrationForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Mencegah form dari mengirim data secara default
+
+                // Mendefinisikan array input yang akan divalidasi
+                const inputs = [
+                    document.getElementById('name'),
+                    document.getElementById('email'),
+                    document.getElementById('password'),
+                    document.getElementById('confirmPassword')
+                ];
+
+                let isValid = true; // Flag untuk menandai validasi
+
+                // Loop melalui setiap input untuk cek kekosongan
+                for (let input of inputs) {
+                    if (input.value.trim() === "") {
+                        input.style.borderColor = 'red'; // Ubah border jadi merah jika kosong
+                        isValid = false; // Update flag validasi
+                        alert(`Isian kolom ${input.name} tidak boleh kosong`); // Tampilkan alert sesuai input yang kosong
+                    } else {
+                        input.style.borderColor = ''; // Reset border jika input terisi
+                    }
+                }
+
+                // Validasi panjang kata sandi
+                const passwordInput = document.getElementById('password');
+                const confirmPasswordInput = document.getElementById('confirmPassword');
+                const passwordError = document.getElementById('passwordError');
+                const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+                if (passwordInput.value.length < 8) {
+                    passwordInput.style.borderColor = 'red'; // Ubah border jadi merah jika kurang dari 8 karakter
+                    passwordError.innerText = 'Kata sandi harus memiliki minimal 8 karakter'; // Tampilkan pesan error
+                    isValid = false; // Update flag validasi
+                } else {
+                    passwordInput.style.borderColor = ''; // Reset border jika valid
+                    passwordError.innerText = ''; // Hilangkan pesan error
+                }
+
+                // Validasi konfirmasi kata sandi
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    confirmPasswordInput.style.borderColor = 'red'; // Ubah border jadi merah jika tidak cocok
+                    confirmPasswordError.innerText = 'Konfirmasi kata sandi tidak cocok'; // Tampilkan pesan error
+                    isValid = false; // Update flag validasi
+                } else {
+                    confirmPasswordInput.style.borderColor = ''; // Reset border jika valid
+                    confirmPasswordError.innerText = ''; // Hilangkan pesan error
+                }
+
+                if (isValid) {
+                    // Jika semua input terisi dan valid, form bisa di submit atau melakukan selanjutnya
+                    alert("Pendaftaran berhasil!");
+                    // this.submit(); // Aktifkan ini untuk submit form jika sudah valid
+                }
+            });
+        });
+    </script>
+</body>
+</html>
