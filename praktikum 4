@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registrasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('th.jfif'); /* Ganti dengan URL gambar latar belakang Anda */
+            background-size: cover;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8); /* Menambahkan opasitas pada form */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: fit-content;
+            max-width: 90%;
+        }
+
+        h2 {
+            color: #1811e1e9; /* warna teks */
+            text-align: center; /* posisi teks */
+            font-size: 16px; /* Ukuran teks */
+            margin-top: 20px; /* Posisi vertikal tengah */: auto; /* Posisi vertikal tengah */
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <h2>Form Informasi Proyek</h2>
+        <label for="projectName">Nama Proyek:</label>
+        <input type="text" id="projectName" name="projectName">
+
+        <label for="organizationBenefits">Manfaat Proyek bagi Organisasi:</label>
+        <input type="text" id="organizationBenefits" name="organizationBenefits">
+
+        <label for="leadingIndicator">Leading Indicator:</label>
+        <input type="text" id="leadingIndicator" name="leadingIndicator">
+
+        <label for="userOutcomes">User Outcomes:</label>
+        <input type="text" id="userOutcomes" name="userOutcomes">
+
+        <label for="modelProperties">Model Properties:</label>
+        <input type="text" id="modelProperties" name="modelProperties">
+
+        <label for="startDate">Tanggal Mulai:</label>
+        <input type="date" id="startDate" name="startDate">
+
+        <label for="endDate">Tanggal Selesai:</label>
+        <input type="date" id="endDate" name="endDate">
+
+        <label for="completionStatus">Status Penyelesaian:</label>
+        <select id="completionStatus" name="completionStatus">
+            <option value="selesai">Selesai</option>
+            <option value="berlangsung">Berlangsung</option>
+            <option value="gagal">Gagal</option>
+        </select>
+
+        <label for="completionNotes">Deskripsi Catatan Akhir Kegiatan:</label>
+        <textarea id="completionNotes" name="completionNotes" rows="4"></textarea>
+
+        <button type="submit">Simpan Informasi Proyek</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('registrationForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Mencegah form dari mengirim data secara default
+
+                // Mendefinisikan array input yang akan divalidasi
+                const inputs = [
+                    document.getElementById('projectName'),
+                    document.getElementById('organizationBenefits'),
+                    document.getElementById('leadingIndicator'),
+                    document.getElementById('userOutcomes'),
+                    document.getElementById('modelProperties'),
+                    document.getElementById('startDate'),
+                    document.getElementById('endDate'),
+                    document.getElementById('completionNotes')
+                ];
+
+                let isValid = true; // Flag untuk menandai validasi
+
+                // Loop melalui setiap input untuk cek kekosongan
+                for (let input of inputs) {
+                    if (input.value.trim() === "") {
+                        input.style.borderColor = 'red'; // Ubah border jadi merah jika kosong
+                        isValid = false; // Update flag validasi
+                        alert(`Isian kolom ${input.name} tidak boleh kosong`); // Tampilkan alert sesuai input yang kosong
+                    } else {
+                        input.style.borderColor = ''; // Reset border jika input terisi
+                    }
+                }
+
+                // Validasi status penyelesaian
+                const completionStatus = document.getElementById('completionStatus');
+                if (completionStatus.value === "") {
+                    completionStatus.style.borderColor = 'red'; // Ubah border jadi merah jika kosong
+                    isValid = false; // Update flag validasi
+                    alert("Pilih status penyelesaian proyek"); // Tampilkan alert jika status penyelesaian tidak dipilih
+                } else {
+                    completionStatus.style.borderColor = ''; // Reset border jika input terisi
+                }
+
+                if (isValid) {
+                    // Jika semua input terisi dan valid, form bisa di submit atau melakukan selanjutnya
+                    alert("Informasi proyek berhasil disimpan!");
+                    // this.submit(); // Aktifkan ini untuk submit form jika sudah valid
+                }
+            });
+        });
+    </script>
+</body>
+</html>
